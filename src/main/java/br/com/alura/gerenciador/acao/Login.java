@@ -25,12 +25,12 @@ public class Login implements Acao {
 		Usuario usuario = banco.existeUsuario(login, senha);
 		
 		if(usuario != null) {
-			System.out.println("Usuário existe");
-			HttpSession sessao = request.getSession();
-			sessao.setAttribute("usuarioLogado", usuario);
-			return "redirect:entrada?acao=ListaEmpresas";
+		    System.out.println("Usuario existe");
+		    HttpSession sessao = request.getSession();
+		    sessao.setAttribute("usuarioLogado", usuario);
+		    return "redirect:entrada?acao=ListaEmpresas";
 		} else {
-			return "redirect:entrada?acao=LoginForm";
+		    return "redirect:entrada?acao=LoginForm";
 		}
 	}
 }

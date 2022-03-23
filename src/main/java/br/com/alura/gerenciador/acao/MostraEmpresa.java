@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.acao;
+	package br.com.alura.gerenciador.acao;
 
 import java.io.IOException;
 
@@ -23,7 +23,6 @@ public class MostraEmpresa implements Acao{
 		System.out.println(empresa.getNome());
 
 		request.setAttribute("empresa", empresa);
-		RequestDispatcher rd = request.getRequestDispatcher("/formAlteraEmpresa.jsp");
 		
 		return "forward:formAlteraEmpresa.jsp"; 
 	}
