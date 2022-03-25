@@ -21,19 +21,19 @@ import br.com.alura.gerenciador.acao.Acao;
  */
 @WebFilter("/entrada")
 public class ControladorFilter extends HttpFilter implements Filter {
-	
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
 		super.init();
 	}
-	
+
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 		super.destroy();
 	}
-	
+
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
@@ -48,27 +48,24 @@ public class ControladorFilter extends HttpFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		String paramAcao = request.getParameter("acao");
-		
-        String nomeDaClasse = "br.com.alura.gerenciador.acao." + paramAcao;
 
-        String nome;
-        try {
-            Class classe = Class.forName(nomeDaClasse);
-            Acao acao = (Acao) classe.newInstance();
-            nome = acao.executa(request,response);
-        } catch (ClassNotFoundException | 
-                InstantiationException | 
-                IllegalAccessException e) {
-            throw new ServletException(e);
-        }
+		String nomeDaClasse = "br.com.alura.gerenciador.acao." + paramAcao;
 
-        String[] tipoEEndereco = nome.split(":");
-        if(tipoEEndereco[0].equals("forward")) {
-            RequestDispatcher rd = 
-                request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect(tipoEEndereco[1]);
-        }
+		String nome;
+		try {
+			Class classe = Class.forName(nomeDaClasse);
+			Acao acao = (Acao) classe.newInstance();
+			nome = acao.executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			throw new ServletException(e);
+		}
+
+		String[] tipoEEndereco = nome.split(":");
+		if (tipoEEndereco[0].equals("forward")) {
+			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
+			rd.forward(request, response);
+		} else {
+			response.sendRedirect(tipoEEndereco[1]);
+		}
 	}
 }
