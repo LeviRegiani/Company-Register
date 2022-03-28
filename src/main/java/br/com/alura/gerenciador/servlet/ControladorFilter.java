@@ -42,7 +42,7 @@ public class ControladorFilter extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 
-		System.out.println("AutorizacaoFilter");
+		System.out.println("ControladorFilter");
 
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
